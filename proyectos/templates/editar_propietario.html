@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>{% if form.instance.pk %}Editar Propietario{% else %}Agregar Propietario{% endif %}</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+
+     <!-- Librerías Bootstrap y File Input -->
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.4/css/fileinput.min.css" rel="stylesheet">
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.4/js/fileinput.min.js"></script>
+ 
+     <script>
+         $(document).ready(function() {
+             // Aplicar el plugin fileinput al campo de archivo
+             $("#id_foto").fileinput({
+                 showUpload: false,
+                 allowedFileExtensions: ["jpg", "png", "jpeg"],
+                 dropZoneEnabled: true,
+                 browseLabel: "Seleccionar o arrastrar imagen"
+             });
+         });
+     </script>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>¿Estás seguro de que deseas eliminar la fecha de entrega?</h2>
+    <p>Proyecto: {{ fecha_entrega.proyecto.nombre }}</p>
+    <p>Fecha: {{ fecha_entrega.fecha }}</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        <a href="{% url 'lista_fechas_entrega' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+{% endblock %}

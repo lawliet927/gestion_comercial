@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Lista de Propietarios</h2>
+    <a href="{% url 'agregar_propietario' %}" class="btn btn-primary">Agregar Nuevo Propietario</a>
+    <table class="table mt-4"  id="propietarios">
+        <thead>
+            <tr>
+                <th>Nombre Completo</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Foto</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for propietario in propietarios %}
+                <tr>
+                    <td>{{ propietario.nombre_completo }}</td>
+                    <td>{{ propietario.email }}</td>
+                    <td>{{ propietario.telefono }}</td>
+                    <td>
+                        {% if propietario.foto %}
+                            <img src="{{ propietario.foto.url }}" alt="Foto" style="width: 50px; height: 50px;">
+                        {% else %}
+                            Sin foto
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'editar_propietario' propietario.id %}" class="btn btn-warning">Editar</a>
+                        <a href="{% url 'eliminar_propietario' propietario.id %}" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <!-- CSS de DataTables -->
+<link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.dataTables.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.2.0/css/buttons.dataTables.min.css">
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+<!-- JS de DataTables -->
+<script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.2.0/js/dataTables.buttons.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.2.0/js/buttons.dataTables.js"></script>
+
+<!-- Librerías para exportar -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.2.0/js/buttons.html5.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#propietarios').DataTable({
+            dom: 'Bfrtip', // Los botones aparecen encima de la tabla
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ],
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json'
+            }
+        });
+    });
+    
+</Script>
+{% endblock %}

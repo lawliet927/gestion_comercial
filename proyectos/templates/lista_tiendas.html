@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Lista de Tiendas</h2>
+    
+    <a href="{% url 'agregar_tienda' %}" class="btn btn-primary">Agregar Nueva Tienda</a>
+    <table class="table mt-4" id="puerto">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Ubicación</th>
+                <th>Edificación</th>
+                <th>Acciones</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for tienda in tiendas %}
+                <tr>
+                    <td>{{ tienda.nombre }}</td>
+                    <td>{{ tienda.ubicacion }}</td>
+                    <td>{{ tienda.edificacion.nombre }}</td>
+                    <td>
+                        <a href="{% url 'editar_tienda' tienda.id %}" class="btn btn-warning">Editar</a>
+                        <a href="{% url 'eliminar_tienda' tienda.id %}" class="btn btn-danger">Eliminar</a>
+                    </td>
+                    
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <!-- DataTables CSS y JS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.7/css/buttons.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.7/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.7/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.7/js/buttons.print.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#puerto').DataTable({
+                dom: 'Bfrtip',
+                buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json'
+                }
+            });
+        });
+    </script>
+    
+    
+    
+{% endblock %}

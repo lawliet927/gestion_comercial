@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>¿Estás seguro de eliminar la tienda "{{ tienda.nombre }}"?</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+    </form>
+    <a href="{% url 'lista_tiendas' %}" class="btn btn-secondary">Cancelar</a>
+{% endblock %}

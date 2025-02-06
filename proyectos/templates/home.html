@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Agregar Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<div class="container mt-5">
+    <h1 class="text-center main-title">Bienvenido a la Página de Inicio</h1>
+    <p class="text-center main-subtitle">Aquí puedes ver el contenido principal de la página de inicio.</p>
+
+    <!-- Carrusel de Imágenes -->
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{% static 'img/imagen1.jpg' %}" class="d-block w-100 carousel-img" alt="Imagen 1">
+                <div class="carousel-caption custom-caption">
+                    <h5>Explora la Naturaleza</h5>
+                    <p>Descubre paisajes impresionantes.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'img/imagen2.jpg' %}" class="d-block w-100 carousel-img" alt="Imagen 2">
+                <div class="carousel-caption custom-caption">
+                    <h5>Ciudades Vibrantes</h5>
+                    <p>Sumérgete en la arquitectura y la cultura urbana.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'img/imagen3.jpg' %}" class="d-block w-100 carousel-img" alt="Imagen 3">
+                <div class="carousel-caption custom-caption">
+                    <h5>Tecnología Avanzada</h5>
+                    <p>Innovaciones que están cambiando el mundo.</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Siguiente</span>
+        </button>
+    </div>
+</div>
+
+<!-- Estilos para mejorar la apariencia -->
+<style>
+    /* Fuente elegante */
+    body {
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* Títulos principales */
+    .main-title {
+        font-size: 2.5rem;
+        font-weight: 600;
+        color: #4A90E2;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .main-subtitle {
+        font-size: 1.2rem;
+        color: #333;
+    }
+
+    /* Carrusel */
+    .carousel {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .carousel-item img {
+        object-fit: cover;
+        width: 100%;
+        height: 55vh; /* Ajuste dinámico de altura */
+        transition: transform 0.8s ease-in-out;
+    }
+
+    /* Responsividad */
+    @media (max-width: 768px) {
+        .carousel-item img {
+            height: 40vh;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .carousel-item img {
+            height: 30vh;
+        }
+    }
+
+    /* Estilo de las descripciones en el carrusel */
+    .custom-caption {
+        background: rgba(0, 0, 0, 0.6); /* Fondo oscuro semitransparente */
+        padding: 10px;
+        border-radius: 10px;
+        transition: all 0.5s ease-in-out;
+    }
+
+    .custom-caption h5 {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #FFD700; /* Amarillo dorado */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    .custom-caption p {
+        font-size: 1rem;
+        color: #f8f8f8;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Animación de las descripciones */
+    .carousel-item .custom-caption {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    .carousel-item.active .custom-caption {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Efecto de zoom en imágenes activas */
+    .carousel-item.active img {
+        transform: scale(1.05);
+    }
+</style>
+
+{% endblock %}
